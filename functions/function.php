@@ -17,5 +17,18 @@
         $hashedpassword = sha1(md5($password));
         return $hashedpassword;
     }
+    //create login
+    function login()
+    {
+        $sql = "select password from user where username '".$_POST['login_username']."' ";
+        $result = get_data($sql);
+        $user = mysqli_fetch_assoc($result)
+        if($user['password'] == hashed($_POST['login_password'])){
+            $_SESSION['username'] = $_POST['login_username'];
+            echo "<script>window.location='index.php'</script>";
+        }else{
+            echo "<div class='alert alert-danger'> invalid Credentials. </div>";
+        }
+    }
 
 ?>
